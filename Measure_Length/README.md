@@ -7,7 +7,7 @@ This script takes three inputs as below
 
 >>>>This tool is tested against shapefile and projected coordinate system with ArcGIS Advanced License
 
-![alt tag](http://i.imgur.com/2QyzZQQ.png) Search radius is less from the image below
+![alt tag](http://i.imgur.com/2QyzZQQ.png)
 
 
 ==================================================
