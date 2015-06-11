@@ -1,6 +1,6 @@
 This tools generates point connected lines based on the set search radius(connection distance).
 This script creates some temporary file and folder (C:\temp) which will be deleted when script completes.
-This script takes three inputs as below
+This script takes four inputs as below
 >>1. Input Point Feature (shapefile)
 >>2. Output workspace(folder)
 >>3. Output feature name(string)
