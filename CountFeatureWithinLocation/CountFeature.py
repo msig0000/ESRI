@@ -5,9 +5,7 @@ inF = arcpy.GetParameterAsText(0)
 selectF = arcpy.GetParameterAsText(1)
 fName = arcpy.GetParameterAsText(2)
 
-arcpy.env.workspace = r'C:\Users\USER_NAME\Desktop\gissta\workspace'
-inF  = r'C:\Users\USER_NAME\Desktop\gissta\workspace\grid.shp'  #Practice_Stops
-selectF = r'C:\Users\USER_NAME\Desktop\gissta\workspace\schools_p.shp'  # "Practice_Sales.shp"
+
 
 pair = []
 pairID = []
