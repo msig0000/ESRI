@@ -9,12 +9,13 @@ This script takes five inputs as below
 >>5. Search_Radius (Linear unit) :The search extent of the INPUT feature where COUNT feaure will be searched
 
 
+![alt tag](http://i.imgur.com/L8XwCJ1.png)
 
 
 
 >>>>This tool is tested against shapefile and projected coordinate system with ArcGIS Advanced License
 
-![alt tag](http://imgur.com/L8XwCJ1)
+
 
 
 ==================================================
