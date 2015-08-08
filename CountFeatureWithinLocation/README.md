@@ -24,7 +24,7 @@ This script takes five inputs as below
 
 Email: msi_g@yahoo.com
 
-Writer/Developer: Shariful Islam
+Writer/Developer: sharifulgeo
 
 Created on 13 June, 2015
 
