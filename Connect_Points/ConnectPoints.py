@@ -19,10 +19,10 @@ if not os.path.exists(r"C:\temp"):
 env.workspace = r"C:\temp"
 arcpy.env.overwriteOutput =True
 #=====================Declare local variables=============================#
-fc = arcpy.GetParameterAsText(0)
-wrkspace = arcpy.GetParameterAsText(1)
-fc_out = arcpy.GetParameterAsText(2)
-radius = arcpy.GetParameterAsText(3)
+fc = arcpy.GetParameterAsText(0)#r'C:\Users\Winrock\Documents\ArcGIS\snp_early.shp'
+fc_out = arcpy.GetParameterAsText(1)#r'C:\Users\Winrock\Documents\ArcGIS\snp_early_lines.shp'
+radius = arcpy.GetParameterAsText(2)#"1000 Meters"
+#radius = "{0} Meters".format(radius)
 
 #=====================Declare constant local variables=============================#
 distance = r"C:\temp\distance.dbf"
@@ -33,35 +33,31 @@ prjs = arcpy.Describe(fc).spatialReference.exportToString()
 
 
 #=================Do some analysis==========================#
-arcpy.CreateFeatureclass_management(wrkspace,fc_out+".shp","POLYLINE",fc,"DISABLED","DISABLED",prjs)
+arcpy.CreateFeatureclass_management(out_path=os.path.dirname(fc_out), out_name=os.path.basename(fc_out), geometry_type="POLYLINE", template="", has_m="DISABLED", has_z="DISABLED", spatial_reference=prjs, config_keyword="", spatial_grid_1="0", spatial_grid_2="0", spatial_grid_3="0")
 arcpy.PointDistance_analysis(fc,fc,distance,radius)
 
 #=================Create Pair of FID Points==========================#
-
-curSDisnc = arcpy.SearchCursor(distance)
-
-Inpt_FID = [row.getValue("INPUT_FID") for row in curSDisnc]
-curSDisnc = arcpy.SearchCursor(distance)
-Outpt_FID = [row.getValue("NEAR_FID") for row in curSDisnc]
-
+curSDisnc = arcpy.da.SearchCursor(distance,("INPUT_FID","NEAR_FID"))
+Inpt_FID = [row[0] for row in curSDisnc]
+curSDisnc = arcpy.da.SearchCursor(distance,("INPUT_FID","NEAR_FID"))
+Outpt_FID = [row[1] for row in curSDisnc]
 pair = zip(Inpt_FID,Outpt_FID)
-
 del curSDisnc
 
 #============Insert Cursor=====================================#
 
-curI = arcpy.da.InsertCursor(os.path.join(wrkspace,fc_out+".shp"), ["SHAPE@"])
+curI = arcpy.da.InsertCursor(os.path.join(fc_out), ["SHAPE@"])
 
  
 #=====================Get X,Y data=============================#
-
-curSfc = arcpy.da.SearchCursor(fc,["SHAPE@XY","FID"])
+objid = [i.name for i in arcpy.ListFields(fc)][0]
+curSfc = arcpy.da.SearchCursor(fc,["SHAPE@XY",objid])
 
 
 def retFID(X):
-    sql = (""""FID" = {0}""").format(X)
+    sql = ("""{0} = {1}""").format(objid,X)
     arcpy.AddMessage("Creating line for"+sql)
-    cur= arcpy.da.SearchCursor(fc,["FID","SHAPE@XY"],sql)
+    cur= arcpy.da.SearchCursor(fc,[objid,"SHAPE@XY"],sql)
     for i in cur:
         return i[1]
     del cur
@@ -83,4 +79,3 @@ except:
     pass
 
 print "Completed Line Generation"
-
