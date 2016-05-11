@@ -6,8 +6,5 @@ to commit to this repository. I chose python arcpy module of ESRI.
 ==================================================
 
 Email: msi_g@yahoo.com
-
-Writer/Developer: sharifulgeo
-
 Created in 2015
 
