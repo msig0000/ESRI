@@ -35,6 +35,6 @@ Email: msi_g@yahoo.com
 
 Writer/Developer: sharifulgeo
 
-Created on 26 April, 2015
+Created on 16 september, 2016
 
 N.B. This tool is tested against feature class and projected coordinate system
