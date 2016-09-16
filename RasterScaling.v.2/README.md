@@ -8,14 +8,11 @@ all the years in the excel file and this raster for each 154 days.
 Say raster name in 0512 i.e. May 12 say again excel file has two years 1912 and 1913
 So now you can generate two raster for May 12 for both 1912 and 1913.
 
-
-This script takes inputs as below
->>1. Updating  Feature class
->>2. Updating Feature class Key Field
->>3. Updating Feature class Value Field
->>4. Updater  Feature class
->>5. Updater Feature class Key Field
->>6. Updater Feature class Value Field
+This script takes  inputs as below
+>>1. Input raster folder
+>>2. Input excel file path - needs to be exactly formatted as attached
+>>3. Output raster folder
+>>4. Temporary folder
 
 
 
@@ -26,6 +23,6 @@ Email: msi_g@yahoo.com
 
 Writer/Developer: sharifulgeo
 
-Created on 16 September, 2016
+Created on 16 september, 2016
 
 N.B. This tool is tested against feature class and projected coordinate system
