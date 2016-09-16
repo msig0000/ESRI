@@ -14,7 +14,7 @@ This script takes three inputs as below
 
 Email: msi_g@yahoo.com
 
-
+Writer/Developer: sharifulgeo
 
 Created on 11 June, 2015
 
