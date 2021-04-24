@@ -17,7 +17,6 @@ Search radius is higher than the upper image
 
 ==================================================
 
-Email: msi_g@yahoo.com
 
 Writer/Developer: sharifulgeo
 

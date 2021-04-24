@@ -31,7 +31,6 @@ This script takes four inputs as below
 
 ==================================================
 
-Email: msi_g@yahoo.com
 
 Writer/Developer: sharifulgeo
 
