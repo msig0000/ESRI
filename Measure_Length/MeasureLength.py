@@ -1,33 +1,18 @@
 import arcpy
-import Tkinter as tk
-from tkinter import messagebox as mb
-
-root = tk.Tk()
-root.withdraw()
+import pythonaddins as pa
 
 arcpy.env.overwriteOutput = True
 
 # InFC = r'C:\Users\pc\OneDrive\Documents\ArcGIS\Default.gdb\test_point'  # 'Sample_Points_ConnectPoints  '  # arcpy.GetParameterAsText(0)
 # SerialField = arcpy.Describe(InFC).OIDFieldName  # 'OBJECTID'  # u'Unq'  # arcpy.GetParameterAsText(1)
-# DistancField = u'LengthC1'  # arcpy.GetParameterAsText(2)
-
+# DistancField = u'LengthMeasures'  # arcpy.GetParameterAsText(2)
 
 InFC = arcpy.GetParameterAsText(0)
 SerialField = arcpy.GetParameterAsText(1)
 DistancField = arcpy.GetParameterAsText(2)
 
-arcpy.AddMessage(InFC)
-arcpy.AddMessage(SerialField)
-arcpy.AddMessage(DistancField)
-
-def messagebox(title, message, **options):
-    res = mb.askquestion(title, message)
-    if res == 'yes':
-        return True
-    else:
-        # mb.showinfo('Return', 'Returning to main application')
-        return False
-
+arcpy.AddMessage("Adding cumulative distance field {0} to the feature {1} based on the order as set by serial or oder field named {2}".\
+    format(DistancField,InFC,SerialField))
 
 features = [f for f in arcpy.da.SearchCursor(InFC, (SerialField, "SHAPE@"),
                                              sql_clause=(None, "ORDER BY '{0}'".format(SerialField)))]
@@ -54,7 +39,8 @@ if DistancField not in [ff_.name for ff_ in arcpy.ListFields(InFC)]:
     arcpy.AddField_management(in_table=InFC, field_name=DistancField, field_type="DOUBLE", field_precision="10",
                               field_scale="10", field_length="", field_alias="", field_is_nullable="NULLABLE",
                               field_is_required="NON_REQUIRED", field_domain="")
-elif messagebox('Do you want to proceed?', 'Field with this name exits do you want to delete it and create new one?'):
+elif pa.MessageBox('Do you want to proceed?', 'Field with this name exits do you want to delete it and create new one?',
+                   3):
     arcpy.DeleteField_management(InFC,
                                  [DistancField])
     arcpy.AddField_management(in_table=InFC, field_name=DistancField, field_type="DOUBLE", field_precision="10",
@@ -66,3 +52,4 @@ with arcpy.da.UpdateCursor(InFC, (DistancField, SerialField),
     for index, row in enumerate(upd_cur):
         row[0] = update_values[index][1]
         upd_cur.updateRow(row)
+
