@@ -39,7 +39,7 @@ if DistancField not in [ff_.name for ff_ in arcpy.ListFields(InFC)]:
     arcpy.AddField_management(in_table=InFC, field_name=DistancField, field_type="DOUBLE", field_precision="10",
                               field_scale="10", field_length="", field_alias="", field_is_nullable="NULLABLE",
                               field_is_required="NON_REQUIRED", field_domain="")
-elif pa.MessageBox('Do you want to proceed?', 'Field with this name exits do you want to delete it and create new one?',3):
+elif pa.MessageBox('Field with name {} already exits do you want to delete it and create new one?'.format(DistancField),'Do you want to proceed?',3):
     arcpy.DeleteField_management(InFC,
                                  [DistancField])
     arcpy.AddField_management(in_table=InFC, field_name=DistancField, field_type="DOUBLE", field_precision="10",
